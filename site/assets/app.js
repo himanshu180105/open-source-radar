@@ -144,7 +144,10 @@
   function restoreFromUrl() {
     const params = new URLSearchParams(location.search);
     for (const element of form.elements) {
-      if (element.name && params.has(element.name)) element.value = params.get(element.name);
+      if (!element.name || !params.has(element.name)) continue;
+      const value = params.get(element.name);
+      if (element.tagName === "SELECT" && ![...element.options].some((option) => option.value === value)) continue;
+      element.value = value;
     }
   }
 
@@ -542,10 +545,12 @@
     list.append(fragment);
     shown += next.length;
     more.hidden = shown >= filtered.length;
-    moreButton.textContent = t("more", {
-      shown: numberFormat.format(Math.min(PAGE_SIZE, filtered.length - shown)),
-      remaining: numberFormat.format(filtered.length - shown),
-    });
+    if (!more.hidden) {
+      moreButton.textContent = t("more", {
+        shown: numberFormat.format(Math.min(PAGE_SIZE, filtered.length - shown)),
+        remaining: numberFormat.format(filtered.length - shown),
+      });
+    }
   }
 
   function populateSelect(select, options) {

@@ -969,7 +969,7 @@ def render_language_feeds(
         beginner_issues = language_issues[language]
         if beginner_issues:
             # Empty feeds stay on disk for existing subscribers but are not listed.
-            feed_index.append(f'        <li><a href="{slug}.xml">{language} ({len(beginner_issues)})</a></li>')
+            feed_index.append(f'        <li><a href="{slug}.xml">{html.escape(language)} ({len(beginner_issues)})</a></li>')
 
         tree = _build_rss_tree(
             title=language,
@@ -1014,7 +1014,7 @@ def render_language_feeds(
         ]
     )
     for title, slug, count in topic_rows:
-        feed_index.append(f'        <li><a href="topics/{slug}.xml">{title} ({count})</a></li>')
+        feed_index.append(f'        <li><a href="topics/{slug}.xml">{html.escape(title)} ({count})</a></li>')
     feed_index.extend(
         [
             "      </ul>",

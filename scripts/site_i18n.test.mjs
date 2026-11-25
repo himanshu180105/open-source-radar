@@ -228,3 +228,22 @@ test("translated first-pr pages link their own guide chapters", () => {
     }
   }
 });
+
+test("time.updatedPrefix appears in every time.* string so opened/pushed replacement works", () => {
+  const { messages } = loadI18n("en");
+  const timeKeys = ["time.today", "time.yesterday", "time.days", "time.months", "time.year", "time.years"];
+  for (const [locale, table] of Object.entries(messages)) {
+    const prefix = table["time.updatedPrefix"];
+    assert.ok(prefix, `${locale} defines time.updatedPrefix`);
+    for (const key of timeKeys) {
+      const value = table[key];
+      const forms = typeof value === "string" ? [value] : Object.values(value);
+      for (const form of forms) {
+        assert.ok(
+          form.includes(prefix),
+          `${locale} ${key} (${JSON.stringify(form)}) must include time.updatedPrefix (${JSON.stringify(prefix)})`,
+        );
+      }
+    }
+  }
+});
