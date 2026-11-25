@@ -20,5 +20,6 @@
 এটিও কাজে লাগবে:
 
 - [শব্দকোষ](glossary.md): fork, upstream, rebase, squash, CI, DCO এবং অন্যান্য শব্দের এক লাইনে অর্থ।
+- [সচরাচর জিজ্ঞাসা (FAQ)](faq.md): প্রথম pull request-এর আগে ও পরে সবচেয়ে বেশি জিজ্ঞেস করা প্রশ্নের সংক্ষিপ্ত উত্তর।
 
 অনুবাদে সাহায্য করতে চান? [Open issues](https://github.com/TanbirRamim/open-source-radar/issues?q=is%3Aissue+is%3Aopen+Bengali) দেখুন।
